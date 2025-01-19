@@ -1,0 +1,57 @@
+/* Cacher le bouton pause en mode PAUSE */
+#pause-icon {
+  display: none;
+}
+
+/* Afficher le bouton pause en mode PLAY */
+.playing #pause-icon {
+  display: inline;
+}
+
+/* Cacher le bouton play en mode PLAY */
+.playing #play-icon {
+  display: none;
+}
+
+/* Changer le style du bouton like */
+#like.liked {
+  background-color: green;
+}
+
+/* Sliders */
+input[type="range"] {
+  -webkit-appearance: none;
+  margin-right: 15px;
+  width: 200px;
+  height: 7px;
+  border-radius: 5px;
+  background: lightgray;
+  background-image: linear-gradient(#ff4500, #fe6a35);
+  background-size: var(--progress-percentage) 100%;
+  background-repeat: no-repeat;
+}
+
+/* Le curseur du slider */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #f84e11;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Le curseur du slider au survol */
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: rebeccapurple;
+}
+
+/* La zone du slider */
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}

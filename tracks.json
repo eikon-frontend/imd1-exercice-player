@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Outer Wilds",
+    "artist": "Andrew Prahlow",
+    "src": "music/OuterWilds.mp3",
+    "cover": "covers/OuterWilds.jpg"
+  },
+  {
+    "title": "Gucci Gang",
+    "artist": "Lil Pump",
+    "src": "music/GucciGang.mp3",
+    "cover": "covers/GucciGang.png"
+  }
+]
