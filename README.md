@@ -25,54 +25,54 @@ Vous pouvez ajouter autant de fichiers audio que vous le souhaitez. Pour cela, m
 
 Tous ces éléments doivent être présents dans le fichier HTML pour assurer le bon fonctionnement du player de musique.
 
-- [x] Couverture
+- **Couverture – `trackCover`**
   ```html
   <img id="cover" alt="cover" />
   ```
-- [x] Titre
+- **Titre – `trackTitle`**
   ```html
   <h3 id="track-title">Titre</h3>
   ```
-- [x] Artiste
+- **Artiste – `trackArtist`**
   ```html
   <p id="track-artist">Artiste</p>
   ```
-- [x] Durée temps écoulé
+- **Durée temps écoulé – `trackCurrentTime`**
   ```html
   <span id="track-current-time">0:00</span>
   ```
-- [x] Durée totale
+- **Durée totale – `trackDuration`**
   ```html
   <span id="track-duration">0:00</span>
   ```
-- [x] Précédent
+- **Précédent – `prev`**
   ```html
   <button id="prev">Précédent</button>
   ```
-- [x] Play/Pause
+- **Play/Pause – `playPause`**
   ```html
   <button id="play-pause">
     <span id="play-icon">▶️</span>
     <span id="pause-icon">⏸️</span>
   </button>
   ```
-- [x] Suivant
+- **Suivant – `next`**
   ```html
   <button id="next">Suivant</button>
   ```
-- [x] Barre de progression
+- **Barre de progression – `progressBar`**
   ```html
   <input type="range" id="progress-bar" value="0" min="0" step="1" />
   ```
-- [x] Like (optionnel)
+- **Like (optionnel) – `like`**
   ```html
   <button id="like">❤️</button>
   ```
-- [x] Volume (optionnel)
+- **Volume (optionnel) – `volume`**
   ```html
   <input type="range" id="volume" min="0" max="1" step="0.01" value="1" />
   ```
-- [x] Playlist (optionnel)
+- **Playlist (optionnel) – `playlist` `playlistTrackTemplate`**
   ```html
   <ul id="playlist">
     <template id="track-template">
