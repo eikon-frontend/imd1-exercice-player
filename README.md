@@ -1,5 +1,18 @@
 # Music Player
 
+## Consignes
+
+Adaptez le code HTML et CSS (sans toucher au JS) pour mettre en page et en forme votre player de musique selon le design réalisé sur Figma. Vous devrez :
+
+Vous avez à disposition un fichier `index.html` avec le code HTML de base, un fichier `style.css` pour les styles, et un fichier `script.js` qui contient le code JavaScript pour le player de musique.
+
+1. Modifier le fichier HTML pour inclure tous les éléments nécessaires au bon fonctionnement du player. La base du player est déjà en place, vous devez ajouter les éléments manquants afin d'intégrer fidèlement votre design Figma.
+2. Utiliser les classes et les identifiants fournis pour styliser les éléments du player. Certaines classes et identifiants sont déjà présents dans le fichier HTML et le fichier CSS, vous pouvez les modifier ou en ajouter de nouveaux si nécessaire. Quelques classes sont injectées dynamiquement par le script JavaScript, vous pouvez les utiliser pour cibler les éléments du player selon les différents états de celui-ci.
+3. S'assurer que le player fonctionne correctement sur différentes tailles d'écrans mobiles.
+4. Tester le player pour vérifier que tous les éléments sont bien alignés et que les interactions (comme les boutons play/pause, précédent/suivant, et la barre de progression) fonctionnent comme prévu.
+
+L'objectif est de créer un player de musique fonctionnel et esthétiquement conforme au design que vous avez réalisé sur Figma en cours de UI Design.
+
 ## Installation
 
 Vous pouvez ajouter autant de fichiers audio que vous le souhaitez. Pour cela, modifiez le fichier `tracks.json` pour ajouter les informations de vos musiques sous ce format:
@@ -73,6 +86,9 @@ Tous ces éléments doivent être présents dans le fichier HTML pour assurer le
   <input type="range" id="volume" min="0" max="1" step="0.01" value="1" />
   ```
 - **Playlist (optionnel) – `playlist` `playlistTrackTemplate`**
+
+  L'élément avec la classe `track` sera automatiquement cloné pour chaque musique ajoutée dans le fichier `tracks.json`. Pour que cela fonctionne correctement, il doit être placé dans un élélment `template` avec l'id `track-template`:
+
   ```html
   <ul id="playlist">
     <template id="track-template">
