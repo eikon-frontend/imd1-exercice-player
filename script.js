@@ -24,6 +24,8 @@ const audioPlayer = (() => {
   const likeBtn = document.querySelector("#like");
   const coverElement = document.querySelector("#cover");
   const volumeControl = document.querySelector("#volume");
+  const playlistElement = document.querySelector("#playlist");
+  const trackTemplate = document.querySelector("#track-template");
 
   const elements = {
     playPauseBtn,
@@ -34,9 +36,7 @@ const audioPlayer = (() => {
     artistElement,
     durationElement,
     currentTimeElement,
-    likeBtn,
     coverElement,
-    volumeControl,
   };
 
   Object.entries(elements).forEach(([key, element]) => {
@@ -68,6 +68,15 @@ const audioPlayer = (() => {
       audio.load();
       updateTrackInfo();
       updateLikeStatus();
+
+      document.querySelectorAll(".track").forEach((track) => {
+        track.classList.remove("current-track");
+      });
+
+      const playlistTrackItem = document.querySelector(`#track-${index}`);
+      if (playlistTrackItem && index === currentTrackIndex) {
+        playlistTrackItem.classList.add("current-track");
+      }
     } catch (error) {
       displayError("Erreur lors du chargement de la piste.");
     }
@@ -226,6 +235,33 @@ const audioPlayer = (() => {
     }
   };
 
+  // Populate playlist
+  const populatePlaylist = () => {
+    if (!playlistElement && !trackTemplate) {
+      displayError(
+        "Élément de la liste de lecture manquant. Veuillez consulter le README."
+      );
+      return;
+    }
+    try {
+      tracks.forEach((track, index) => {
+        const clone = document.importNode(trackTemplate.content, true);
+        clone.querySelector(".track").setAttribute("id", `track-${index}`);
+        clone.querySelector(".track-title").textContent = track.title;
+        clone.querySelector(".track-artist").textContent = track.artist;
+
+        clone.querySelector(".track").addEventListener("click", () => {
+          currentTrackIndex = index;
+          loadTrack(currentTrackIndex);
+          audio.play();
+        });
+        playlistElement.appendChild(clone);
+      });
+    } catch (error) {
+      displayError("Erreur lors de la population de la liste de lecture.");
+    }
+  };
+
   // Event listeners
   if (playPauseBtn) playPauseBtn.addEventListener("click", togglePlayPause);
   if (nextBtn) nextBtn.addEventListener("click", nextTrack);
@@ -259,6 +295,7 @@ const audioPlayer = (() => {
           audio.volume * 100 + "%"
         );
       }
+      populatePlaylist();
     } catch (error) {
       displayError("Erreur lors de l'initialisation du lecteur audio.");
     }

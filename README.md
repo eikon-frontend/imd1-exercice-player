@@ -60,15 +60,26 @@ Tous ces éléments doivent être présents dans le fichier HTML pour assurer le
   ```html
   <button id="next">Suivant</button>
   ```
-- [x] Like
-  ```html
-  <button id="like">❤️</button>
-  ```
 - [x] Barre de progression
   ```html
   <input type="range" id="progress-bar" value="0" min="0" step="1" />
   ```
-- [x] Volume
+- [x] Like (optionnel)
+  ```html
+  <button id="like">❤️</button>
+  ```
+- [x] Volume (optionnel)
   ```html
   <input type="range" id="volume" min="0" max="1" step="0.01" value="1" />
+  ```
+- [x] Playlist (optionnel)
+  ```html
+  <ul id="playlist">
+    <template id="track-template">
+      <li class="track">
+        <h4 class="track-title">Titre</h4>
+        <p class="track-artist">Artiste</p>
+      </li>
+    </template>
+  </ul>
   ```
