@@ -1,9 +1,11 @@
+// Module du lecteur audio
 const audioPlayer = (() => {
-  let tracks = [];
-  let currentTrackIndex = 0;
-  let audio;
-  const likes = JSON.parse(localStorage.getItem("likes")) || {};
+  let tracks = []; // Liste des pistes
+  let currentTrackIndex = 0; // Index de la piste actuelle
+  let audio; // Élément audio
+  const likes = JSON.parse(localStorage.getItem("likes")) || {}; // Récupération des likes depuis le localStorage
 
+  // Sélection des éléments DOM obligatoires
   const elements = {
     playPause: document.querySelector("#play-pause"),
     prev: document.querySelector("#prev"),
@@ -16,6 +18,7 @@ const audioPlayer = (() => {
     trackCover: document.querySelector("#cover"),
   };
 
+  // Sélection des éléments DOM optionnels
   const optionalElements = {
     like: document.querySelector("#like"),
     volume: document.querySelector("#volume"),
@@ -23,6 +26,7 @@ const audioPlayer = (() => {
     playlistTrackTemplate: document.querySelector("#track-template"),
   };
 
+  // Affichage des erreurs
   const displayError = (message) => {
     const errorElement = document.createElement("div");
     errorElement.textContent = message;
@@ -30,11 +34,13 @@ const audioPlayer = (() => {
     document.body.prepend(errorElement);
   };
 
+  // Vérification de la présence des éléments obligatoires
   Object.entries(elements).forEach(([key, element]) => {
     if (!element)
       displayError(`Élément "${key}" manquant. Veuillez consulter le README.`);
   });
 
+  // Mise à jour des informations de la piste
   const updateTrackInfo = () => {
     const track = tracks[currentTrackIndex];
     if (elements.trackTitle) elements.trackTitle.textContent = track.title;
@@ -45,6 +51,7 @@ const audioPlayer = (() => {
     if (elements.trackCover) elements.trackCover.src = track.cover;
   };
 
+  // Chargement d'une piste
   const loadTrack = (index) => {
     audio.src = tracks[index].src;
     audio.load();
@@ -58,6 +65,7 @@ const audioPlayer = (() => {
       playlistTrackItem.classList.add("current-track");
   };
 
+  // Lecture/Pause
   const togglePlayPause = () => {
     if (audio.paused) {
       audio.play();
@@ -66,18 +74,21 @@ const audioPlayer = (() => {
     }
   };
 
+  // Piste suivante
   const nextTrack = () => {
     currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
     loadTrack(currentTrackIndex);
     audio.play();
   };
 
+  // Piste précédente
   const prevTrack = () => {
     currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
     loadTrack(currentTrackIndex);
     audio.play();
   };
 
+  // Mise à jour de la barre de progression
   const updateProgressBar = () => {
     const currentTime = audio.currentTime;
     const duration = audio.duration || 0;
@@ -100,10 +111,12 @@ const audioPlayer = (() => {
     );
   };
 
+  // Recherche dans la piste
   const seekAudio = () => {
     audio.currentTime = elements.progressBar.value;
   };
 
+  // Formatage du temps
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60)
@@ -112,6 +125,7 @@ const audioPlayer = (() => {
     return `${minutes}:${seconds}`;
   };
 
+  // Toggle du bouton Like
   const toggleLike = () => {
     if (!optionalElements.like) return;
     optionalElements.like.classList.toggle("liked");
@@ -120,6 +134,7 @@ const audioPlayer = (() => {
     localStorage.setItem("likes", JSON.stringify(likes));
   };
 
+  // Mise à jour de l'état du bouton Like
   const updateLikeStatus = () => {
     if (!optionalElements.like) return;
     const isLiked =
@@ -131,6 +146,7 @@ const audioPlayer = (() => {
     }
   };
 
+  // Mise à jour du volume
   const updateVolume = (e) => {
     const target = e.target || optionalElements.volume;
     audio.volume = target.value;
@@ -143,6 +159,7 @@ const audioPlayer = (() => {
     target.style.setProperty("--progress-percentage", percentage + "%");
   };
 
+  // Population de la playlist
   const populatePlaylist = () => {
     if (!optionalElements.playlist || !optionalElements.playlistTrackTemplate)
       return;
@@ -164,6 +181,7 @@ const audioPlayer = (() => {
     });
   };
 
+  // Ajout des écouteurs d'événements
   if (elements.playPause)
     elements.playPause.addEventListener("click", togglePlayPause);
   if (elements.next) elements.next.addEventListener("click", nextTrack);
@@ -175,6 +193,7 @@ const audioPlayer = (() => {
   if (optionalElements.volume)
     optionalElements.volume.addEventListener("input", updateVolume);
 
+  // Initialisation du lecteur
   const initializePlayer = () => {
     audio = new Audio(tracks[currentTrackIndex].src);
     audio.addEventListener("timeupdate", updateProgressBar);
@@ -186,6 +205,7 @@ const audioPlayer = (() => {
     );
     audio.addEventListener("ended", nextTrack);
 
+    // Gestion des raccourcis clavier
     document.addEventListener("keydown", (e) => {
       if (e.code === "Space") togglePlayPause();
       if (e.code === "ArrowRight") nextTrack();
@@ -207,6 +227,7 @@ const audioPlayer = (() => {
     populatePlaylist();
   };
 
+  // Chargement des pistes depuis le fichier JSON
   fetch("./tracks.json")
     .then((response) => response.json())
     .then((data) => {
