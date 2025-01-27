@@ -1,5 +1,13 @@
 # Music Player
 
+## Objectif personnel
+
+Définissez un objectif personnel pour ce projet. Cela peut être un objectif technique ou un objectif de conception. Par exemple, vous pouvez décider de vous concentrer sur la mise en page, la typographie, les couleurs, les animations, les transitions, les effets visuels, la propreté du code, la sémantique, la performance, ou tout autre aspect qui vous intéresse.
+
+**Mon Objectif Personnel**
+
+> [ÉCRIVEZ VOTRE OBJECTIF ICI]
+
 ## Consignes
 
 Adaptez le code HTML et CSS (sans toucher au JS) pour mettre en page et en forme votre player de musique selon le design réalisé sur Figma. Vous devrez :
